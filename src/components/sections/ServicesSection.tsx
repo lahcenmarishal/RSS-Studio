@@ -54,8 +54,8 @@ const ServicesSection = () => {
   const currentService = services[activeService];
 
   return (
-    <section className="scroll-section relative flex items-center bg-secondary overflow-hidden">
-      <div className="w-full h-full flex flex-col lg:flex-row">
+    <section className="scroll-section relative bg-secondary">
+      <div className="w-full min-h-full flex flex-col lg:flex-row">
         {/* Service navigation - Left side */}
         <div className="lg:w-2/5 p-6 lg:p-12 flex flex-col justify-center bg-cream">
           {/* Section label */}

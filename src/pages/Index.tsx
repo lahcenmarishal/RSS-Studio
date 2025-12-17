@@ -107,7 +107,7 @@ const Index = () => {
         {/* Main horizontal scroll container */}
         <div
           ref={containerRef}
-          className="h-full w-full flex overflow-x-auto overflow-y-hidden scroll-smooth"
+          className="h-full w-full flex overflow-x-auto scroll-smooth"
           style={{ scrollSnapType: 'x mandatory' }}
         >
           <HeroSection 
