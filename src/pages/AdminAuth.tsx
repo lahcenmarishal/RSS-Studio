@@ -64,13 +64,8 @@ const AdminAuth = () => {
     setIsSubmitting(false);
   };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-primary flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent"></div>
-      </div>
-    );
-  }
+  // Don't show loading spinner for too long - show the form after a brief check
+  // This prevents the page from being stuck on loading indefinitely
 
   return (
     <div className="min-h-screen bg-primary flex items-center justify-center p-6">
