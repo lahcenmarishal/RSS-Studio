@@ -21,19 +21,20 @@ const HeroSection = ({ onNavigateToContact, onNavigateToServices }: HeroSectionP
       {/* Content */}
       <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-12 text-center lg:text-left py-8">
         <div className="space-y-6 sm:space-y-8">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-accent/20 backdrop-blur-sm rounded-full border border-accent/30 opacity-0 animate-fade-up">
+          {/* Main Title - moved before badge on mobile */}
+          <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-primary-foreground leading-tight opacity-0 animate-fade-up sm:order-none order-first">
+            L'art du
+            <span className="block text-accent">sur-mesure</span>
+          </h1>
+
+          {/* Badge - appears after title on mobile */}
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-accent/20 backdrop-blur-sm rounded-full border border-accent/30 opacity-0 animate-fade-up stagger-1">
             <span className="w-2 h-2 bg-accent rounded-full animate-pulse-soft" />
             <span className="font-sans text-xs sm:text-sm text-primary-foreground/90 tracking-wider uppercase">
               Artisan Menuisier depuis 2010
             </span>
           </div>
 
-          {/* Main Title */}
-          <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-primary-foreground leading-tight opacity-0 animate-fade-up stagger-1">
-            L'art du
-            <span className="block text-accent">sur-mesure</span>
-          </h1>
 
           {/* Subtitle */}
           <p className="font-sans text-base sm:text-lg md:text-xl text-primary-foreground/80 max-w-xl mx-auto lg:mx-0 leading-relaxed opacity-0 animate-fade-up stagger-2">
