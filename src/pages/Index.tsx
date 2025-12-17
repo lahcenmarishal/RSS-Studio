@@ -30,24 +30,41 @@ const Index = () => {
 
   useEffect(() => {
     const container = containerRef.current;
-    if (container) {
-      container.addEventListener('scroll', checkScroll);
-      checkScroll();
-      
-      const handleWheel = (e: WheelEvent) => {
-        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-          e.preventDefault();
-          container.scrollLeft += e.deltaY;
-        }
-      };
-      
-      container.addEventListener('wheel', handleWheel, { passive: false });
-      
-      return () => {
-        container.removeEventListener('scroll', checkScroll);
-        container.removeEventListener('wheel', handleWheel);
-      };
-    }
+    if (!container) return;
+
+    container.addEventListener('scroll', checkScroll);
+    checkScroll();
+
+    // Convert vertical wheel to horizontal ONLY when the current section can't scroll vertically
+    const handleWheel = (e: WheelEvent) => {
+      const target = e.target as HTMLElement | null;
+      const sectionEl = target?.closest('.scroll-section') as HTMLElement | null;
+
+      if (sectionEl) {
+        const canScrollVertically = sectionEl.scrollHeight > sectionEl.clientHeight;
+        const scrollingDown = e.deltaY > 0;
+        const atTop = sectionEl.scrollTop <= 0;
+        const atBottom = sectionEl.scrollTop + sectionEl.clientHeight >= sectionEl.scrollHeight - 1;
+        const sectionCanConsumeDeltaY =
+          canScrollVertically && ((scrollingDown && !atBottom) || (!scrollingDown && !atTop));
+
+        // Let the section scroll normally (vertical)
+        if (sectionCanConsumeDeltaY) return;
+      }
+
+      // Otherwise, use vertical wheel to move horizontally between sections
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        container.scrollLeft += e.deltaY;
+      }
+    };
+
+    container.addEventListener('wheel', handleWheel, { passive: false });
+
+    return () => {
+      container.removeEventListener('scroll', checkScroll);
+      container.removeEventListener('wheel', handleWheel);
+    };
   }, [checkScroll]);
 
   const scrollToSection = useCallback((index: number) => {

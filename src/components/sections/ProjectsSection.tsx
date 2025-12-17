@@ -66,12 +66,15 @@ const ProjectsSection = () => {
             {filteredProjects.map((project, index) => (
               <div
                 key={project.id}
-                className={`group relative overflow-hidden rounded-sm cursor-pointer ${
-                  index === 0 ? 'col-span-2 lg:col-span-1 lg:row-span-2' : ''
+                className={`group relative overflow-hidden rounded-sm cursor-pointer aspect-[4/3] lg:aspect-[3/2] min-h-[180px] ${
+                  index === 0 ? 'col-span-2 lg:col-span-1 lg:row-span-2 lg:aspect-[3/4]' : ''
                 }`}
               >
-                <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                  style={{ backgroundImage: `url(${project.image})` }}
+                <img
+                  src={project.image}
+                  alt={`Réalisation ${project.category} - ${project.title}`}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-300" />
                 
