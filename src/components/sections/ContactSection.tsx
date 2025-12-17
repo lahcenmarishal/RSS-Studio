@@ -2,6 +2,16 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { MapPin, Phone, Mail, Clock, MessageCircle, Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
+import { z } from 'zod';
+
+const contactSchema = z.object({
+  name: z.string().trim().min(1, 'Nom requis').max(100),
+  email: z.string().trim().email('Email invalide').max(255),
+  phone: z.string().max(20).optional(),
+  service: z.string().max(50).optional(),
+  message: z.string().trim().min(1, 'Message requis').max(2000),
+});
 
 const contactInfo = [
   {
@@ -28,6 +38,7 @@ const contactInfo = [
 
 const ContactSection = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -36,13 +47,44 @@ const ContactSection = () => {
     message: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message envoyé !",
-      description: "Nous vous répondrons dans les plus brefs délais.",
-    });
-    setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+
+    const validation = contactSchema.safeParse(formData);
+    if (!validation.success) {
+      toast({
+        title: 'Erreur',
+        description: validation.error.errors[0].message,
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    const { error } = await supabase.from('quote_requests').insert([{
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone || null,
+      service: formData.service || null,
+      message: formData.message.trim(),
+    }]);
+
+    if (error) {
+      toast({
+        title: 'Erreur',
+        description: 'Impossible d\'envoyer le message. Veuillez réessayer.',
+        variant: 'destructive',
+      });
+    } else {
+      toast({
+        title: 'Message envoyé !',
+        description: 'Nous vous répondrons dans les plus brefs délais.',
+      });
+      setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+    }
+
+    setIsSubmitting(false);
   };
 
   const handleWhatsApp = () => {
@@ -151,9 +193,9 @@ const ContactSection = () => {
               </div>
 
               <div className="flex gap-4">
-                <Button type="submit" variant="default" size="lg" className="flex-1">
+                <Button type="submit" variant="default" size="lg" className="flex-1" disabled={isSubmitting}>
                   <Send className="w-4 h-4" />
-                  Envoyer
+                  {isSubmitting ? 'Envoi...' : 'Envoyer'}
                 </Button>
                 <Button 
                   type="button" 
