@@ -9,7 +9,7 @@ interface HeroSectionProps {
 
 const HeroSection = ({ onNavigateToContact, onNavigateToServices }: HeroSectionProps) => {
   return (
-    <section className="scroll-section relative flex items-center justify-center overflow-hidden">
+    <section className="scroll-section scroll-section-hero relative flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"

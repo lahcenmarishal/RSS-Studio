@@ -52,8 +52,8 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="scroll-section relative bg-secondary overflow-hidden">
-      <div className="h-full flex flex-col lg:flex-row">
+    <section className="scroll-section relative bg-secondary">
+      <div className="min-h-full flex flex-col lg:flex-row pb-16">
         {/* Left side - Contact form */}
         <div className="lg:w-1/2 p-6 lg:p-12 flex flex-col justify-center bg-cream">
           <div className="max-w-lg mx-auto w-full">

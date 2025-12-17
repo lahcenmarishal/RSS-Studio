@@ -24,8 +24,8 @@ const ProjectsSection = () => {
     : projects.filter(p => p.category === activeCategory);
 
   return (
-    <section className="scroll-section relative bg-primary overflow-hidden">
-      <div className="h-full flex flex-col py-20 px-6 lg:px-12">
+    <section className="scroll-section relative bg-primary">
+      <div className="min-h-full flex flex-col py-8 lg:py-12 px-6 lg:px-12">
         {/* Header */}
         <div className="max-w-7xl mx-auto w-full mb-8">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">

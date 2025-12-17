@@ -26,11 +26,11 @@ const values = [
 
 const AboutSection = () => {
   return (
-    <section className="scroll-section relative flex items-center bg-cream overflow-hidden">
+    <section className="scroll-section relative bg-cream">
       {/* Decorative background */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-secondary to-transparent opacity-50" />
       
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-8 lg:py-12">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Image side */}
           <div className="relative order-2 lg:order-1">
