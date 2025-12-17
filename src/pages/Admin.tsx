@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LogOut, FolderOpen, MessageSquare, Plus, Trash2, Edit2, Eye, EyeOff, Upload } from 'lucide-react';
+import { LogOut, FolderOpen, MessageSquare, Plus, Trash2, Edit2, Eye, EyeOff } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -102,32 +102,32 @@ const Admin = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-card border-b border-border px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div>
-            <h1 className="font-serif text-2xl text-foreground">RSS Studio Admin</h1>
-            <p className="font-sans text-sm text-muted-foreground">{user?.email}</p>
+      <header className="bg-card border-b border-border px-4 sm:px-6 py-3 sm:py-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          <div className="min-w-0">
+            <h1 className="font-serif text-lg sm:text-2xl text-foreground truncate">RSS Studio Admin</h1>
+            <p className="font-sans text-xs sm:text-sm text-muted-foreground truncate">{user?.email}</p>
           </div>
-          <Button variant="outline" size="sm" onClick={handleLogout}>
-            <LogOut className="w-4 h-4 mr-2" />
-            Déconnexion
+          <Button variant="outline" size="sm" onClick={handleLogout} className="shrink-0">
+            <LogOut className="w-4 h-4 sm:mr-2" />
+            <span className="hidden sm:inline">Déconnexion</span>
           </Button>
         </div>
       </header>
 
       {/* Content */}
-      <main className="max-w-7xl mx-auto p-6">
+      <main className="max-w-7xl mx-auto p-4 sm:p-6">
         <Tabs defaultValue="projects" className="w-full">
-          <TabsList className="mb-6">
-            <TabsTrigger value="projects" className="flex items-center gap-2">
+          <TabsList className="mb-4 sm:mb-6 w-full sm:w-auto flex">
+            <TabsTrigger value="projects" className="flex-1 sm:flex-none flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm">
               <FolderOpen className="w-4 h-4" />
-              Projets ({projects.length})
+              <span className="hidden xs:inline">Projets</span> ({projects.length})
             </TabsTrigger>
-            <TabsTrigger value="quotes" className="flex items-center gap-2">
+            <TabsTrigger value="quotes" className="flex-1 sm:flex-none flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm">
               <MessageSquare className="w-4 h-4" />
-              Demandes de devis
+              <span className="hidden xs:inline">Devis</span>
               {unreadCount > 0 && (
-                <span className="ml-1 bg-accent text-accent-foreground text-xs px-2 py-0.5 rounded-full">
+                <span className="bg-accent text-accent-foreground text-xs px-1.5 sm:px-2 py-0.5 rounded-full">
                   {unreadCount}
                 </span>
               )}
@@ -135,9 +135,9 @@ const Admin = () => {
           </TabsList>
 
           <TabsContent value="projects">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="font-serif text-xl text-foreground">Gestion des projets</h2>
-              <Button onClick={() => navigate('/admin/project/new')}>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 mb-4 sm:mb-6">
+              <h2 className="font-serif text-lg sm:text-xl text-foreground">Gestion des projets</h2>
+              <Button onClick={() => navigate('/admin/project/new')} size="sm" className="w-full sm:w-auto">
                 <Plus className="w-4 h-4 mr-2" />
                 Nouveau projet
               </Button>
@@ -146,35 +146,36 @@ const Admin = () => {
             {loadingProjects ? (
               <div className="text-center py-12 text-muted-foreground">Chargement...</div>
             ) : projects.length === 0 ? (
-              <div className="text-center py-12 text-muted-foreground">
+              <div className="text-center py-12 text-muted-foreground text-sm sm:text-base">
                 Aucun projet. Cliquez sur "Nouveau projet" pour en créer un.
               </div>
             ) : (
-              <div className="grid gap-4">
+              <div className="grid gap-3 sm:gap-4">
                 {projects.map((project) => (
                   <div
                     key={project.id}
-                    className="bg-card border border-border rounded-sm p-4 flex items-center gap-4"
+                    className="bg-card border border-border rounded-sm p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4"
                   >
                     <img
                       src={project.image_url}
                       alt={project.title}
-                      className="w-20 h-20 object-cover rounded-sm"
+                      className="w-full sm:w-20 h-32 sm:h-20 object-cover rounded-sm"
                     />
-                    <div className="flex-1">
-                      <h3 className="font-serif text-lg text-foreground">{project.title}</h3>
-                      <p className="font-sans text-sm text-muted-foreground">{project.category}</p>
+                    <div className="flex-1 min-w-0 w-full">
+                      <h3 className="font-serif text-base sm:text-lg text-foreground truncate">{project.title}</h3>
+                      <p className="font-sans text-xs sm:text-sm text-muted-foreground">{project.category}</p>
                       {project.is_featured && (
                         <span className="inline-block mt-1 text-xs bg-accent/20 text-accent px-2 py-0.5 rounded">
                           En vedette
                         </span>
                       )}
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 w-full sm:w-auto">
                       <Button
                         variant="outline"
                         size="icon"
                         onClick={() => navigate(`/admin/project/${project.id}`)}
+                        className="flex-1 sm:flex-none"
                       >
                         <Edit2 className="w-4 h-4" />
                       </Button>
@@ -182,6 +183,7 @@ const Admin = () => {
                         variant="destructive"
                         size="icon"
                         onClick={() => deleteProject.mutate(project.id)}
+                        className="flex-1 sm:flex-none"
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>
@@ -193,27 +195,27 @@ const Admin = () => {
           </TabsContent>
 
           <TabsContent value="quotes">
-            <h2 className="font-serif text-xl text-foreground mb-6">Demandes de devis</h2>
+            <h2 className="font-serif text-lg sm:text-xl text-foreground mb-4 sm:mb-6">Demandes de devis</h2>
 
             {loadingQuotes ? (
               <div className="text-center py-12 text-muted-foreground">Chargement...</div>
             ) : quoteRequests.length === 0 ? (
-              <div className="text-center py-12 text-muted-foreground">
+              <div className="text-center py-12 text-muted-foreground text-sm sm:text-base">
                 Aucune demande de devis.
               </div>
             ) : (
-              <div className="grid gap-4">
+              <div className="grid gap-3 sm:gap-4">
                 {quoteRequests.map((quote) => (
                   <div
                     key={quote.id}
-                    className={`bg-card border rounded-sm p-4 ${
+                    className={`bg-card border rounded-sm p-3 sm:p-4 ${
                       quote.is_read ? 'border-border' : 'border-accent'
                     }`}
                   >
-                    <div className="flex items-start justify-between mb-3">
-                      <div>
-                        <h3 className="font-serif text-lg text-foreground">{quote.name}</h3>
-                        <p className="font-sans text-sm text-muted-foreground">
+                    <div className="flex flex-col sm:flex-row items-start justify-between gap-3 mb-3">
+                      <div className="min-w-0 flex-1">
+                        <h3 className="font-serif text-base sm:text-lg text-foreground">{quote.name}</h3>
+                        <p className="font-sans text-xs sm:text-sm text-muted-foreground break-all">
                           {quote.email} {quote.phone && `• ${quote.phone}`}
                         </p>
                         {quote.service && (
@@ -222,7 +224,7 @@ const Admin = () => {
                           </span>
                         )}
                       </div>
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 shrink-0">
                         <Button
                           variant="outline"
                           size="icon"
@@ -240,7 +242,7 @@ const Admin = () => {
                         </Button>
                       </div>
                     </div>
-                    <p className="font-sans text-sm text-foreground whitespace-pre-wrap">
+                    <p className="font-sans text-xs sm:text-sm text-foreground whitespace-pre-wrap">
                       {quote.message}
                     </p>
                     <p className="font-sans text-xs text-muted-foreground mt-3">
