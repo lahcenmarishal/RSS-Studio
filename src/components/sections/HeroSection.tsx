@@ -19,7 +19,7 @@ const HeroSection = ({ onNavigateToContact, onNavigateToServices }: HeroSectionP
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-12 text-center lg:text-left py-8">
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-12 text-center lg:text-left pt-20 sm:pt-8 pb-8">
         <div className="space-y-6 sm:space-y-8">
           {/* Main Title - moved before badge on mobile */}
           <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-primary-foreground leading-tight opacity-0 animate-fade-up sm:order-none order-first">
