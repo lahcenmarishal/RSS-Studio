@@ -94,32 +94,33 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="scroll-section relative bg-secondary">
-      <div className="min-h-full flex flex-col lg:flex-row pb-16">
+    <section className="scroll-section relative bg-secondary flex flex-col">
+      {/* Main content */}
+      <div className="flex-1 flex flex-col lg:flex-row">
         {/* Left side - Contact form */}
-        <div className="lg:w-1/2 p-6 lg:p-12 flex flex-col justify-center bg-cream">
+        <div className="lg:w-1/2 p-4 sm:p-6 lg:p-12 flex flex-col justify-center bg-cream">
           <div className="max-w-lg mx-auto w-full">
             {/* Header */}
-            <div className="mb-8">
-              <div className="inline-flex items-center gap-3 mb-4">
-                <span className="w-12 h-px bg-accent" />
-                <span className="font-sans text-sm text-accent tracking-[0.3em] uppercase">
+            <div className="mb-6 sm:mb-8">
+              <div className="inline-flex items-center gap-3 mb-3 sm:mb-4">
+                <span className="w-8 sm:w-12 h-px bg-accent" />
+                <span className="font-sans text-xs sm:text-sm text-accent tracking-[0.2em] sm:tracking-[0.3em] uppercase">
                   Contact
                 </span>
               </div>
-              <h2 className="font-serif text-3xl lg:text-4xl text-foreground leading-tight">
+              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-foreground leading-tight">
                 Parlons de votre <span className="text-accent">projet</span>
               </h2>
-              <p className="font-sans text-muted-foreground mt-3">
+              <p className="font-sans text-sm sm:text-base text-muted-foreground mt-2 sm:mt-3">
                 Remplissez le formulaire ou contactez-nous directement.
               </p>
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid grid-cols-2 gap-4">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
-                  <label className="font-sans text-xs tracking-wider uppercase text-muted-foreground mb-2 block">
+                  <label className="font-sans text-xs tracking-wider uppercase text-muted-foreground mb-1.5 sm:mb-2 block">
                     Nom complet
                   </label>
                   <input
@@ -127,26 +128,26 @@ const ContactSection = () => {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 bg-background border border-border rounded-sm font-sans text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-background border border-border rounded-sm font-sans text-sm sm:text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all"
                     placeholder="Votre nom"
                   />
                 </div>
                 <div>
-                  <label className="font-sans text-xs tracking-wider uppercase text-muted-foreground mb-2 block">
+                  <label className="font-sans text-xs tracking-wider uppercase text-muted-foreground mb-1.5 sm:mb-2 block">
                     Téléphone
                   </label>
                   <input
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-3 bg-background border border-border rounded-sm font-sans text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-background border border-border rounded-sm font-sans text-sm sm:text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all"
                     placeholder="+212 6..."
                   />
                 </div>
               </div>
 
               <div>
-                <label className="font-sans text-xs tracking-wider uppercase text-muted-foreground mb-2 block">
+                <label className="font-sans text-xs tracking-wider uppercase text-muted-foreground mb-1.5 sm:mb-2 block">
                   Email
                 </label>
                 <input
@@ -154,19 +155,19 @@ const ContactSection = () => {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 bg-background border border-border rounded-sm font-sans text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-background border border-border rounded-sm font-sans text-sm sm:text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all"
                   placeholder="votre@email.com"
                 />
               </div>
 
               <div>
-                <label className="font-sans text-xs tracking-wider uppercase text-muted-foreground mb-2 block">
+                <label className="font-sans text-xs tracking-wider uppercase text-muted-foreground mb-1.5 sm:mb-2 block">
                   Service souhaité
                 </label>
                 <select
                   value={formData.service}
                   onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                  className="w-full px-4 py-3 bg-background border border-border rounded-sm font-sans text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-background border border-border rounded-sm font-sans text-sm sm:text-base text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all"
                 >
                   <option value="">Sélectionnez un service</option>
                   <option value="cuisine">Cuisine équipée</option>
@@ -179,21 +180,21 @@ const ContactSection = () => {
               </div>
 
               <div>
-                <label className="font-sans text-xs tracking-wider uppercase text-muted-foreground mb-2 block">
+                <label className="font-sans text-xs tracking-wider uppercase text-muted-foreground mb-1.5 sm:mb-2 block">
                   Votre message
                 </label>
                 <textarea
                   required
-                  rows={4}
+                  rows={3}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 bg-background border border-border rounded-sm font-sans text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all resize-none"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-background border border-border rounded-sm font-sans text-sm sm:text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all resize-none"
                   placeholder="Décrivez votre projet..."
                 />
               </div>
 
-              <div className="flex gap-4">
-                <Button type="submit" variant="default" size="lg" className="flex-1" disabled={isSubmitting}>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <Button type="submit" variant="default" size="lg" className="flex-1 text-sm sm:text-base" disabled={isSubmitting}>
                   <Send className="w-4 h-4" />
                   {isSubmitting ? 'Envoi...' : 'Envoyer'}
                 </Button>
@@ -202,7 +203,7 @@ const ContactSection = () => {
                   variant="premium" 
                   size="lg"
                   onClick={handleWhatsApp}
-                  className="flex-1"
+                  className="flex-1 text-sm sm:text-base"
                 >
                   <MessageCircle className="w-4 h-4" />
                   WhatsApp
@@ -213,9 +214,9 @@ const ContactSection = () => {
         </div>
 
         {/* Right side - Map & Info */}
-        <div className="lg:w-1/2 relative bg-primary">
-          {/* Map placeholder */}
-          <div className="h-1/2 lg:h-2/3 relative">
+        <div className="lg:w-1/2 flex flex-col bg-primary">
+          {/* Map */}
+          <div className="h-48 sm:h-64 lg:flex-1 relative">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.8461!2d-7.5486!3d33.5731!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDM0JzIzLjIiTiA3wrAzMic1NS4wIlc!5e0!3m2!1sfr!2sma!4v1234567890"
               width="100%"
@@ -230,17 +231,17 @@ const ContactSection = () => {
           </div>
 
           {/* Contact info cards */}
-          <div className="h-1/2 lg:h-1/3 p-6 lg:p-8">
-            <div className="grid grid-cols-2 gap-4 h-full">
+          <div className="p-4 sm:p-6 lg:p-8">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {contactInfo.map((info, index) => (
                 <div
                   key={index}
-                  className="bg-primary-foreground/5 backdrop-blur-sm rounded-sm p-4 hover:bg-primary-foreground/10 transition-colors duration-300"
+                  className="bg-primary-foreground/5 backdrop-blur-sm rounded-sm p-3 sm:p-4 hover:bg-primary-foreground/10 transition-colors duration-300"
                 >
-                  <info.icon className="w-5 h-5 text-accent mb-2" />
-                  <h3 className="font-serif text-sm text-primary-foreground mb-1">{info.title}</h3>
+                  <info.icon className="w-4 h-4 sm:w-5 sm:h-5 text-accent mb-1.5 sm:mb-2" />
+                  <h3 className="font-serif text-xs sm:text-sm text-primary-foreground mb-0.5 sm:mb-1">{info.title}</h3>
                   {info.details.map((detail, i) => (
-                    <p key={i} className="font-sans text-xs text-primary-foreground/70">{detail}</p>
+                    <p key={i} className="font-sans text-xs text-primary-foreground/70 leading-tight">{detail}</p>
                   ))}
                 </div>
               ))}
@@ -249,13 +250,13 @@ const ContactSection = () => {
         </div>
       </div>
 
-      {/* Footer bar */}
-      <div className="absolute bottom-0 left-0 right-0 bg-charcoal py-4 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="font-sans text-xs text-primary-foreground/60">
+      {/* Footer bar - now at the bottom */}
+      <div className="bg-charcoal py-3 sm:py-4 px-4 sm:px-6 shrink-0">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4">
+          <p className="font-sans text-xs text-primary-foreground/60 text-center sm:text-left">
             © 2024 RSS Studio. Tous droits réservés.
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 sm:gap-6">
             <a href="#" className="font-sans text-xs text-primary-foreground/60 hover:text-accent transition-colors">
               Mentions légales
             </a>
