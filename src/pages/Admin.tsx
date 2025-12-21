@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LogOut, FolderOpen, MessageSquare, Plus, Trash2, Edit2, Eye, EyeOff } from 'lucide-react';
+import { LogOut, FolderOpen, MessageSquare, Plus, Trash2, Edit2, Eye, EyeOff, DollarSign } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -11,6 +11,7 @@ import type { Tables } from '@/integrations/supabase/types';
 
 type Project = Tables<'projects'>;
 type QuoteRequest = Tables<'quote_requests'>;
+type PricingItem = Tables<'pricing_items'>;
 
 const Admin = () => {
   const { user, isAdmin, isLoading, signOut } = useAuth();
@@ -50,6 +51,19 @@ const Admin = () => {
     enabled: isAdmin,
   });
 
+  const { data: pricingItems = [], isLoading: loadingPricing } = useQuery({
+    queryKey: ['admin-pricing'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('pricing_items')
+        .select('*')
+        .order('display_order', { ascending: true });
+      if (error) throw error;
+      return data as PricingItem[];
+    },
+    enabled: isAdmin,
+  });
+
   const deleteProject = useMutation({
     mutationFn: async (id: string) => {
       const { error } = await supabase.from('projects').delete().eq('id', id);
@@ -79,6 +93,17 @@ const Admin = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-quotes'] });
       toast({ title: 'Demande supprimée' });
+    },
+  });
+
+  const deletePricing = useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from('pricing_items').delete().eq('id', id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-pricing'] });
+      toast({ title: 'Tarif supprimé' });
     },
   });
 
@@ -122,6 +147,10 @@ const Admin = () => {
             <TabsTrigger value="projects" className="flex-1 sm:flex-none flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm">
               <FolderOpen className="w-4 h-4" />
               <span className="hidden xs:inline">Projets</span> ({projects.length})
+            </TabsTrigger>
+            <TabsTrigger value="pricing" className="flex-1 sm:flex-none flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm">
+              <DollarSign className="w-4 h-4" />
+              <span className="hidden xs:inline">Tarifs</span> ({pricingItems.length})
             </TabsTrigger>
             <TabsTrigger value="quotes" className="flex-1 sm:flex-none flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm">
               <MessageSquare className="w-4 h-4" />
@@ -183,6 +212,73 @@ const Admin = () => {
                         variant="destructive"
                         size="icon"
                         onClick={() => deleteProject.mutate(project.id)}
+                        className="flex-1 sm:flex-none"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </TabsContent>
+
+          <TabsContent value="pricing">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 mb-4 sm:mb-6">
+              <h2 className="font-serif text-lg sm:text-xl text-foreground">Gestion des tarifs</h2>
+              <Button onClick={() => navigate('/admin/tarifs/new')} size="sm" className="w-full sm:w-auto">
+                <Plus className="w-4 h-4 mr-2" />
+                Nouveau tarif
+              </Button>
+            </div>
+
+            {loadingPricing ? (
+              <div className="text-center py-12 text-muted-foreground">Chargement...</div>
+            ) : pricingItems.length === 0 ? (
+              <div className="text-center py-12 text-muted-foreground text-sm sm:text-base">
+                Aucun tarif. Cliquez sur "Nouveau tarif" pour en créer un.
+              </div>
+            ) : (
+              <div className="grid gap-3 sm:gap-4">
+                {pricingItems.map((item) => (
+                  <div
+                    key={item.id}
+                    className={`bg-card border border-border rounded-sm p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 ${
+                      !item.is_active ? 'opacity-50' : ''
+                    }`}
+                  >
+                    {item.image_url && (
+                      <img
+                        src={item.image_url}
+                        alt={item.title}
+                        className="w-full sm:w-20 h-32 sm:h-20 object-cover rounded-sm"
+                      />
+                    )}
+                    <div className="flex-1 min-w-0 w-full">
+                      <h3 className="font-serif text-base sm:text-lg text-foreground truncate">{item.title}</h3>
+                      <p className="font-sans text-xs sm:text-sm text-muted-foreground">{item.category}</p>
+                      <span className="inline-block mt-1 font-serif text-accent font-medium">
+                        {item.price}
+                      </span>
+                      {!item.is_active && (
+                        <span className="inline-block ml-2 text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded">
+                          Inactif
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex gap-2 w-full sm:w-auto">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => navigate(`/admin/tarifs/${item.id}`)}
+                        className="flex-1 sm:flex-none"
+                      >
+                        <Edit2 className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant="destructive"
+                        size="icon"
+                        onClick={() => deletePricing.mutate(item.id)}
                         className="flex-1 sm:flex-none"
                       >
                         <Trash2 className="w-4 h-4" />
