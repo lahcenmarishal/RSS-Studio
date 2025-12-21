@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import logoRssStudio from '@/assets/logo-diamond.png';
+import logoRssStudio from '@/assets/logo-diamond-dark.png';
 
 interface NavItem {
   label: string;
@@ -58,7 +58,7 @@ const Navigation = ({ onNavigate, currentSection }: NavigationProps) => {
               <img 
                 src={logoRssStudio} 
                 alt="RSS Studio Logo" 
-                className="h-12 w-auto"
+                className="h-16 w-auto"
               />
             </button>
 
