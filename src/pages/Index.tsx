@@ -87,16 +87,16 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>RSS Studio | Menuiserie Sur Mesure à Berrechid - Cuisines, Dressings, Placards</title>
-        <meta name="description" content="RSS Studio, artisan menuisier à Berrechid. Fabrication sur mesure de cuisines équipées, dressings, placards, habillages muraux et portes. Devis gratuit." />
-        <meta name="keywords" content="menuiserie sur mesure, cuisine équipée, dressing, placards, habillage mural, portes, Berrechid, Casablanca, Maroc" />
+        <title>RSS Studio | Aménageur d'Espace Sur Mesure à Berrechid - Cuisines, Dressings, Placards</title>
+        <meta name="description" content="RSS Studio, aménageur d'espace à Berrechid. Conception sur mesure de cuisines équipées, dressings, placards, habillages muraux et portes. Devis gratuit." />
+        <meta name="keywords" content="aménagement espace, aménageur sur mesure, cuisine équipée, dressing, placards, habillage mural, portes, Berrechid, Casablanca, Maroc" />
         <link rel="canonical" href="https://rss-studio.ma" />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             "name": "RSS Studio",
-            "description": "Artisan menuisier spécialisé dans la fabrication sur mesure de cuisines équipées, dressings, placards, habillages muraux et portes.",
+            "description": "Aménageur d'espace spécialisé dans la conception sur mesure de cuisines équipées, dressings, placards, habillages muraux et portes.",
             "address": {
               "@type": "PostalAddress",
               "streetAddress": "N4 lot 100 MANAZIL DEROUA 2",
