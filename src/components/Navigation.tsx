@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import logoRssStudio from '@/assets/logo-rss-studio.webp';
 
 interface NavItem {
   label: string;
@@ -52,18 +53,13 @@ const Navigation = ({ onNavigate, currentSection }: NavigationProps) => {
             {/* Logo */}
             <button 
               onClick={() => handleNavClick(0)}
-              className="flex items-center gap-3 group"
+              className="flex items-center gap-2 group"
             >
-              <span className={`font-serif text-2xl font-bold tracking-tight transition-colors duration-300 ${
-                currentSection === 0 && !isScrolled ? 'text-primary-foreground' : 'text-primary'
-              }`}>
-                RSS
-              </span>
-              <span className={`font-sans text-sm tracking-[0.3em] uppercase transition-colors duration-300 ${
-                currentSection === 0 && !isScrolled ? 'text-primary-foreground/80' : 'text-muted-foreground'
-              }`}>
-                Studio
-              </span>
+              <img 
+                src={logoRssStudio} 
+                alt="RSS Studio Logo" 
+                className="h-12 w-auto"
+              />
             </button>
 
             {/* Desktop Menu */}
