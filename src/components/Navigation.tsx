@@ -67,13 +67,13 @@ const Navigation = ({ onNavigate, currentSection }: NavigationProps) => {
             </button>
 
             {/* Desktop Menu */}
-            <div className="hidden lg:flex items-center gap-8">
+            <div className="hidden lg:flex items-center gap-4 xl:gap-6">
               {navItems.map((item) => (
                 item.external && item.path ? (
                   <Link
                     key={item.label}
                     to={item.path}
-                    className={`relative font-sans text-sm tracking-wider uppercase transition-all duration-300 py-2 ${
+                    className={`relative font-sans text-xs xl:text-sm tracking-wider uppercase transition-all duration-300 py-2 ${
                       currentSection === 0 && !isScrolled
                         ? 'text-primary-foreground/90 hover:text-primary-foreground'
                         : 'text-muted-foreground hover:text-foreground'
@@ -85,7 +85,7 @@ const Navigation = ({ onNavigate, currentSection }: NavigationProps) => {
                   <button
                     key={item.label}
                     onClick={() => handleNavClick(item.sectionIndex)}
-                    className={`relative font-sans text-sm tracking-wider uppercase transition-all duration-300 py-2 ${
+                    className={`relative font-sans text-xs xl:text-sm tracking-wider uppercase transition-all duration-300 py-2 ${
                       currentSection === item.sectionIndex
                         ? currentSection === 0 && !isScrolled 
                           ? 'text-accent' 
