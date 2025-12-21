@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { MapPin, Phone, Mail, Clock, MessageCircle, Send } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, MessageCircle, Send, Facebook, Instagram, Youtube } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { z } from 'zod';
@@ -256,6 +256,38 @@ const ContactSection = () => {
           <p className="font-sans text-xs text-primary-foreground/60 text-center sm:text-left">
             © 2024 RSS Studio. Tous droits réservés.
           </p>
+          
+          {/* Social Media Links */}
+          <div className="flex items-center gap-4">
+            <a 
+              href="https://www.facebook.com/share/1C1Aggz2mS/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-primary-foreground/60 hover:text-accent transition-colors"
+              aria-label="Facebook"
+            >
+              <Facebook className="w-5 h-5" />
+            </a>
+            <a 
+              href="https://www.instagram.com/rss_studio_casa?igsh=Y29paTNqMDYxNDN0" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-primary-foreground/60 hover:text-accent transition-colors"
+              aria-label="Instagram"
+            >
+              <Instagram className="w-5 h-5" />
+            </a>
+            <a 
+              href="https://youtube.com/@rss_studio_casa?si=XY_3PrEgCUBd-2we" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-primary-foreground/60 hover:text-accent transition-colors"
+              aria-label="YouTube"
+            >
+              <Youtube className="w-5 h-5" />
+            </a>
+          </div>
+
           <div className="flex items-center gap-4 sm:gap-6">
             <a href="#" className="font-sans text-xs text-primary-foreground/60 hover:text-accent transition-colors">
               Mentions légales
