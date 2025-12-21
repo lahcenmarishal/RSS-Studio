@@ -6,6 +6,8 @@ import AboutSection from '@/components/sections/AboutSection';
 import ServicesSection from '@/components/sections/ServicesSection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
 import ProcessSection from '@/components/sections/ProcessSection';
+import TarifsSection from '@/components/sections/TarifsSection';
+import PartenairesSection from '@/components/sections/PartenairesSection';
 import ContactSection from '@/components/sections/ContactSection';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -14,7 +16,7 @@ const Index = () => {
   const [currentSection, setCurrentSection] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const totalSections = 6;
+  const totalSections = 8;
 
   const checkScroll = useCallback(() => {
     if (containerRef.current) {
@@ -128,13 +130,15 @@ const Index = () => {
           style={{ scrollSnapType: 'x mandatory' }}
         >
           <HeroSection 
-            onNavigateToContact={() => scrollToSection(5)}
+            onNavigateToContact={() => scrollToSection(7)}
             onNavigateToServices={() => scrollToSection(2)}
           />
           <AboutSection />
           <ServicesSection />
           <ProjectsSection />
           <ProcessSection />
+          <TarifsSection />
+          <PartenairesSection />
           <ContactSection />
         </div>
 

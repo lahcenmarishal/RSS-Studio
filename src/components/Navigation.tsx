@@ -1,13 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import Logo from '@/components/Logo';
 
 interface NavItem {
   label: string;
   sectionIndex: number;
-  external?: boolean;
-  path?: string;
 }
 
 const navItems: NavItem[] = [
@@ -16,9 +13,9 @@ const navItems: NavItem[] = [
   { label: 'Services', sectionIndex: 2 },
   { label: 'Réalisations', sectionIndex: 3 },
   { label: 'Processus', sectionIndex: 4 },
-  { label: 'Tarifs', sectionIndex: -1, external: true, path: '/tarifs' },
-  { label: 'Partenaires', sectionIndex: -1, external: true, path: '/partenaires' },
-  { label: 'Contact', sectionIndex: 5 },
+  { label: 'Tarifs', sectionIndex: 5 },
+  { label: 'Partenaires', sectionIndex: 6 },
+  { label: 'Contact', sectionIndex: 7 },
 ];
 
 interface NavigationProps {
@@ -69,40 +66,26 @@ const Navigation = ({ onNavigate, currentSection }: NavigationProps) => {
             {/* Desktop Menu */}
             <div className="hidden lg:flex items-center gap-4 xl:gap-6">
               {navItems.map((item) => (
-                item.external && item.path ? (
-                  <Link
-                    key={item.label}
-                    to={item.path}
-                    className={`relative font-sans text-xs xl:text-sm tracking-wider uppercase transition-all duration-300 py-2 ${
-                      currentSection === 0 && !isScrolled
+                <button
+                  key={item.label}
+                  onClick={() => handleNavClick(item.sectionIndex)}
+                  className={`relative font-sans text-xs xl:text-sm tracking-wider uppercase transition-all duration-300 py-2 ${
+                    currentSection === item.sectionIndex
+                      ? currentSection === 0 && !isScrolled 
+                        ? 'text-accent' 
+                        : 'text-accent'
+                      : currentSection === 0 && !isScrolled
                         ? 'text-primary-foreground/90 hover:text-primary-foreground'
                         : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  {item.label}
+                  <span 
+                    className={`absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-300 ${
+                      currentSection === item.sectionIndex ? 'w-full' : 'w-0'
                     }`}
-                  >
-                    {item.label}
-                  </Link>
-                ) : (
-                  <button
-                    key={item.label}
-                    onClick={() => handleNavClick(item.sectionIndex)}
-                    className={`relative font-sans text-xs xl:text-sm tracking-wider uppercase transition-all duration-300 py-2 ${
-                      currentSection === item.sectionIndex
-                        ? currentSection === 0 && !isScrolled 
-                          ? 'text-accent' 
-                          : 'text-accent'
-                        : currentSection === 0 && !isScrolled
-                          ? 'text-primary-foreground/90 hover:text-primary-foreground'
-                          : 'text-muted-foreground hover:text-foreground'
-                    }`}
-                  >
-                    {item.label}
-                    <span 
-                      className={`absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-300 ${
-                        currentSection === item.sectionIndex ? 'w-full' : 'w-0'
-                      }`}
-                    />
-                  </button>
-                )
+                  />
+                </button>
               ))}
             </div>
 
@@ -132,26 +115,14 @@ const Navigation = ({ onNavigate, currentSection }: NavigationProps) => {
         />
         <div className="relative h-full flex flex-col items-center justify-center gap-6">
           {navItems.map((item, index) => (
-            item.external && item.path ? (
-              <Link
-                key={item.label}
-                to={item.path}
-                onClick={() => setIsOpen(false)}
-                className={`font-serif text-3xl text-primary-foreground hover:text-accent transition-all duration-300 opacity-0 animate-fade-up`}
-                style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'forwards' }}
-              >
-                {item.label}
-              </Link>
-            ) : (
-              <button
-                key={item.label}
-                onClick={() => handleNavClick(item.sectionIndex)}
-                className={`font-serif text-3xl text-primary-foreground hover:text-accent transition-all duration-300 opacity-0 animate-fade-up`}
-                style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'forwards' }}
-              >
-                {item.label}
-              </button>
-            )
+            <button
+              key={item.label}
+              onClick={() => handleNavClick(item.sectionIndex)}
+              className={`font-serif text-3xl text-primary-foreground hover:text-accent transition-all duration-300 opacity-0 animate-fade-up`}
+              style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'forwards' }}
+            >
+              {item.label}
+            </button>
           ))}
         </div>
       </div>
