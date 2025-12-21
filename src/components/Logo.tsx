@@ -6,29 +6,56 @@ interface LogoProps {
 const Logo = ({ className = "h-14 w-auto", color = "currentColor" }: LogoProps) => {
   return (
     <svg
-      viewBox="0 0 120 100"
+      viewBox="0 0 140 120"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      {/* Diamond shape */}
-      <g stroke={color} strokeWidth="2" fill="none">
-        {/* Outer diamond */}
-        <path d="M60 8 L92 40 L60 72 L28 40 Z" />
-        {/* Inner diamond */}
-        <path d="M60 18 L82 40 L60 62 L38 40 Z" />
+      {/* Diamond shape with facets */}
+      <g stroke={color} strokeWidth="1.5" fill="none" strokeLinejoin="round">
+        {/* Top crown - flat top edge */}
+        <path d="M40 25 L100 25" />
+        
+        {/* Crown sides */}
+        <path d="M40 25 L25 45" />
+        <path d="M100 25 L115 45" />
+        
+        {/* Crown to girdle connections */}
+        <path d="M25 45 L115 45" />
+        
+        {/* Crown inner facets */}
+        <path d="M40 25 L55 45" />
+        <path d="M70 25 L70 45" />
+        <path d="M100 25 L85 45" />
+        
+        {/* Crown top inner lines */}
+        <path d="M55 25 L55 45" />
+        <path d="M85 25 L85 45" />
+        
+        {/* Pavilion - bottom point */}
+        <path d="M25 45 L70 95" />
+        <path d="M115 45 L70 95" />
+        
+        {/* Pavilion inner facets */}
+        <path d="M55 45 L70 95" />
+        <path d="M85 45 L70 95" />
+        <path d="M70 45 L70 95" />
+        
+        {/* Additional pavilion facets */}
+        <path d="M40 45 L70 95" />
+        <path d="M100 45 L70 95" />
       </g>
       
       {/* RSS STUDIO text */}
       <text
-        x="60"
-        y="90"
+        x="70"
+        y="112"
         textAnchor="middle"
         fill={color}
         fontFamily="Montserrat, sans-serif"
-        fontSize="12"
+        fontSize="11"
         fontWeight="500"
-        letterSpacing="3"
+        letterSpacing="2.5"
       >
         RSS STUDIO
       </text>
