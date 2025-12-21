@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import logoRssStudio from '@/assets/logo-rss-studio.webp';
+import logoRssStudio from '@/assets/logo-rss-generated.png';
 
 interface NavItem {
   label: string;
