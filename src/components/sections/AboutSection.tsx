@@ -1,5 +1,5 @@
 import { Award, Users, Lightbulb, Heart } from 'lucide-react';
-import spaceDesignerImage from '@/assets/space-designer.jpg';
+import designConceptImage from '@/assets/design-concept.jpg';
 
 const values = [
   {
@@ -36,8 +36,8 @@ const AboutSection = () => {
           <div className="relative order-2 lg:order-1">
             <div className="relative aspect-[4/3] sm:aspect-[4/5] overflow-hidden rounded-sm shadow-strong">
               <img 
-                src={spaceDesignerImage}
-                alt="RSS Studio - Conception d'aménagement sur mesure"
+                src={designConceptImage}
+                alt="RSS Studio - De la conception à la réalisation"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
