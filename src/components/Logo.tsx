@@ -6,13 +6,13 @@ interface LogoProps {
 const Logo = ({ className = "h-14 w-auto", color = "currentColor" }: LogoProps) => {
   return (
     <svg
-      viewBox="0 0 140 120"
+      viewBox="0 0 140 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      {/* Diamond shape with facets */}
-      <g stroke={color} strokeWidth="1.5" fill="none" strokeLinejoin="round">
+      {/* Diamond shape with facets - smaller */}
+      <g stroke={color} strokeWidth="1.2" fill="none" strokeLinejoin="round" transform="translate(35, 5) scale(0.5)">
         {/* Top crown - flat top edge */}
         <path d="M40 25 L100 25" />
         
@@ -46,16 +46,16 @@ const Logo = ({ className = "h-14 w-auto", color = "currentColor" }: LogoProps) 
         <path d="M100 45 L70 95" />
       </g>
       
-      {/* RSS STUDIO text */}
+      {/* RSS STUDIO text - larger */}
       <text
         x="70"
-        y="112"
+        y="90"
         textAnchor="middle"
         fill={color}
         fontFamily="Montserrat, sans-serif"
-        fontSize="11"
+        fontSize="14"
         fontWeight="500"
-        letterSpacing="2.5"
+        letterSpacing="3"
       >
         RSS STUDIO
       </text>
