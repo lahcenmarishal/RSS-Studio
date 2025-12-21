@@ -12,6 +12,8 @@ import Admin from "./pages/Admin";
 import AdminProject from "./pages/AdminProject";
 import Tarifs from "./pages/Tarifs";
 import AdminTarifs from "./pages/AdminTarifs";
+import Partenaires from "./pages/Partenaires";
+import AdminPartenaires from "./pages/AdminPartenaires";
 
 const queryClient = new QueryClient();
 
@@ -26,10 +28,12 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/tarifs" element={<Tarifs />} />
+              <Route path="/partenaires" element={<Partenaires />} />
               <Route path="/admin/auth" element={<AdminAuth />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/admin/project/:id" element={<AdminProject />} />
               <Route path="/admin/tarifs/:id" element={<AdminTarifs />} />
+              <Route path="/admin/partenaires/:id" element={<AdminPartenaires />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

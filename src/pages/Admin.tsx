@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LogOut, FolderOpen, MessageSquare, Plus, Trash2, Edit2, Eye, EyeOff, DollarSign } from 'lucide-react';
+import { LogOut, FolderOpen, MessageSquare, Plus, Trash2, Edit2, Eye, EyeOff, DollarSign, Users } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -12,6 +12,7 @@ import type { Tables } from '@/integrations/supabase/types';
 type Project = Tables<'projects'>;
 type QuoteRequest = Tables<'quote_requests'>;
 type PricingItem = Tables<'pricing_items'>;
+type Partner = Tables<'partners'>;
 
 const Admin = () => {
   const { user, isAdmin, isLoading, signOut } = useAuth();
@@ -64,6 +65,19 @@ const Admin = () => {
     enabled: isAdmin,
   });
 
+  const { data: partners = [], isLoading: loadingPartners } = useQuery({
+    queryKey: ['admin-partners'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('partners')
+        .select('*')
+        .order('display_order', { ascending: true });
+      if (error) throw error;
+      return data as Partner[];
+    },
+    enabled: isAdmin,
+  });
+
   const deleteProject = useMutation({
     mutationFn: async (id: string) => {
       const { error } = await supabase.from('projects').delete().eq('id', id);
@@ -107,6 +121,17 @@ const Admin = () => {
     },
   });
 
+  const deletePartner = useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from('partners').delete().eq('id', id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-partners'] });
+      toast({ title: 'Partenaire supprimé' });
+    },
+  });
+
   const handleLogout = async () => {
     await signOut();
     navigate('/');
@@ -143,7 +168,7 @@ const Admin = () => {
       {/* Content */}
       <main className="max-w-7xl mx-auto p-4 sm:p-6">
         <Tabs defaultValue="projects" className="w-full">
-          <TabsList className="mb-4 sm:mb-6 w-full sm:w-auto flex">
+          <TabsList className="mb-4 sm:mb-6 w-full sm:w-auto flex flex-wrap">
             <TabsTrigger value="projects" className="flex-1 sm:flex-none flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm">
               <FolderOpen className="w-4 h-4" />
               <span className="hidden xs:inline">Projets</span> ({projects.length})
@@ -151,6 +176,10 @@ const Admin = () => {
             <TabsTrigger value="pricing" className="flex-1 sm:flex-none flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm">
               <DollarSign className="w-4 h-4" />
               <span className="hidden xs:inline">Tarifs</span> ({pricingItems.length})
+            </TabsTrigger>
+            <TabsTrigger value="partners" className="flex-1 sm:flex-none flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm">
+              <Users className="w-4 h-4" />
+              <span className="hidden xs:inline">Partenaires</span> ({partners.length})
             </TabsTrigger>
             <TabsTrigger value="quotes" className="flex-1 sm:flex-none flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm">
               <MessageSquare className="w-4 h-4" />
@@ -279,6 +308,77 @@ const Admin = () => {
                         variant="destructive"
                         size="icon"
                         onClick={() => deletePricing.mutate(item.id)}
+                        className="flex-1 sm:flex-none"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </TabsContent>
+
+          <TabsContent value="partners">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 mb-4 sm:mb-6">
+              <h2 className="font-serif text-lg sm:text-xl text-foreground">Gestion des partenaires</h2>
+              <Button onClick={() => navigate('/admin/partenaires/new')} size="sm" className="w-full sm:w-auto">
+                <Plus className="w-4 h-4 mr-2" />
+                Nouveau partenaire
+              </Button>
+            </div>
+
+            {loadingPartners ? (
+              <div className="text-center py-12 text-muted-foreground">Chargement...</div>
+            ) : partners.length === 0 ? (
+              <div className="text-center py-12 text-muted-foreground text-sm sm:text-base">
+                Aucun partenaire. Cliquez sur "Nouveau partenaire" pour en créer un.
+              </div>
+            ) : (
+              <div className="grid gap-3 sm:gap-4">
+                {partners.map((partner) => (
+                  <div
+                    key={partner.id}
+                    className={`bg-card border border-border rounded-sm p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 ${
+                      !partner.is_active ? 'opacity-50' : ''
+                    }`}
+                  >
+                    <img
+                      src={partner.logo_url}
+                      alt={partner.name}
+                      className="w-full sm:w-20 h-32 sm:h-20 object-contain rounded-sm bg-muted/30 p-2"
+                    />
+                    <div className="flex-1 min-w-0 w-full">
+                      <h3 className="font-serif text-base sm:text-lg text-foreground truncate">{partner.name}</h3>
+                      {partner.website_url && (
+                        <a 
+                          href={partner.website_url} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="font-sans text-xs sm:text-sm text-accent hover:underline"
+                        >
+                          {partner.website_url}
+                        </a>
+                      )}
+                      {!partner.is_active && (
+                        <span className="inline-block ml-2 text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded">
+                          Inactif
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex gap-2 w-full sm:w-auto">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => navigate(`/admin/partenaires/${partner.id}`)}
+                        className="flex-1 sm:flex-none"
+                      >
+                        <Edit2 className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant="destructive"
+                        size="icon"
+                        onClick={() => deletePartner.mutate(partner.id)}
                         className="flex-1 sm:flex-none"
                       >
                         <Trash2 className="w-4 h-4" />

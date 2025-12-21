@@ -17,6 +17,7 @@ const navItems: NavItem[] = [
   { label: 'Réalisations', sectionIndex: 3 },
   { label: 'Processus', sectionIndex: 4 },
   { label: 'Tarifs', sectionIndex: -1, external: true, path: '/tarifs' },
+  { label: 'Partenaires', sectionIndex: -1, external: true, path: '/partenaires' },
   { label: 'Contact', sectionIndex: 5 },
 ];
 
