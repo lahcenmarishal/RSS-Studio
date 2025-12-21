@@ -19,7 +19,7 @@ const HeroSection = ({ onNavigateToContact, onNavigateToServices }: HeroSectionP
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-16 text-center lg:text-left py-12 sm:py-16 lg:py-20">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-16 text-center lg:text-left py-12 sm:py-16 lg:pt-32 lg:pb-16">
         <div className="space-y-5 sm:space-y-6 lg:space-y-8">
           {/* Main Title */}
           <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-primary-foreground leading-tight opacity-0 animate-fade-up sm:order-none order-first">
