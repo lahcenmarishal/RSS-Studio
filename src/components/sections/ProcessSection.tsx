@@ -1,4 +1,4 @@
-import { MessageSquare, Pencil, Hammer, Truck } from 'lucide-react';
+import { MessageSquare, Pencil, Wrench, CheckCircle } from 'lucide-react';
 
 const steps = [
   {
@@ -6,28 +6,24 @@ const steps = [
     icon: MessageSquare,
     title: 'Étude & Conseil',
     description: 'Rencontre pour comprendre vos besoins, prise de mesures précises et évaluation de votre espace.',
-    duration: '1-2 jours',
   },
   {
     number: '02',
     icon: Pencil,
     title: 'Conception',
     description: 'Création de plans détaillés et visualisations 3D pour concrétiser votre vision.',
-    duration: '3-5 jours',
   },
   {
     number: '03',
-    icon: Hammer,
-    title: 'Fabrication',
-    description: 'Réalisation artisanale dans notre atelier avec les meilleurs matériaux.',
-    duration: '2-4 semaines',
+    icon: Wrench,
+    title: 'Réalisation',
+    description: 'Fabrication et assemblage avec les meilleurs matériaux et techniques modernes.',
   },
   {
     number: '04',
-    icon: Truck,
-    title: 'Installation',
-    description: 'Pose soignée par nos équipes qualifiées avec finitions impeccables.',
-    duration: '1-3 jours',
+    icon: CheckCircle,
+    title: 'Livraison',
+    description: 'Installation soignée par nos équipes qualifiées avec finitions impeccables.',
   },
 ];
 
@@ -54,7 +50,7 @@ const ProcessSection = () => {
             Un processus <span className="text-accent">transparent</span>
           </h2>
           <p className="font-sans text-muted-foreground mt-4 max-w-2xl mx-auto">
-            De la première rencontre à l'installation finale, nous vous accompagnons à chaque étape de votre projet.
+            De la première rencontre à la livraison finale, nous vous accompagnons à chaque étape de votre projet d'aménagement.
           </p>
         </div>
 
@@ -85,15 +81,9 @@ const ProcessSection = () => {
 
                   {/* Content */}
                   <h3 className="font-serif text-xl text-foreground mb-3">{step.title}</h3>
-                  <p className="font-sans text-sm text-muted-foreground leading-relaxed mb-4">
+                  <p className="font-sans text-sm text-muted-foreground leading-relaxed">
                     {step.description}
                   </p>
-
-                  {/* Duration */}
-                  <div className="flex items-center gap-2 text-accent">
-                    <span className="w-4 h-px bg-accent" />
-                    <span className="font-sans text-xs tracking-wider uppercase">{step.duration}</span>
-                  </div>
                 </div>
 
                 {/* Connector dot for desktop */}

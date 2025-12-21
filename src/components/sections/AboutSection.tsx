@@ -1,16 +1,16 @@
-import { Award, Users, Hammer, Heart } from 'lucide-react';
-import craftsmanImage from '@/assets/craftsman.jpg';
+import { Award, Users, Lightbulb, Heart } from 'lucide-react';
+import spaceDesignerImage from '@/assets/space-designer.jpg';
 
 const values = [
   {
-    icon: Hammer,
-    title: 'Savoir-faire',
-    description: 'Techniques traditionnelles et innovations modernes'
+    icon: Lightbulb,
+    title: 'Créativité',
+    description: 'Solutions innovantes et designs personnalisés'
   },
   {
     icon: Heart,
     title: 'Passion',
-    description: "L'amour du bois et du travail bien fait"
+    description: "L'amour des espaces bien pensés"
   },
   {
     icon: Users,
@@ -36,8 +36,8 @@ const AboutSection = () => {
           <div className="relative order-2 lg:order-1">
             <div className="relative aspect-[4/3] sm:aspect-[4/5] overflow-hidden rounded-sm shadow-strong">
               <img 
-                src={craftsmanImage}
-                alt="Artisan RSS Studio au travail"
+                src={spaceDesignerImage}
+                alt="RSS Studio - Conception d'aménagement sur mesure"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
@@ -62,17 +62,17 @@ const AboutSection = () => {
 
             {/* Title */}
             <h2 className="font-serif text-2xl sm:text-4xl lg:text-5xl text-foreground leading-tight">
-              Un atelier familial dédié à
-              <span className="text-accent"> l'excellence</span>
+              Un studio dédié à
+              <span className="text-accent"> l'aménagement d'espace</span>
             </h2>
 
             {/* Description */}
             <div className="space-y-3 sm:space-y-4 text-muted-foreground font-sans text-sm sm:text-base leading-relaxed">
               <p>
-                Depuis 2010, <strong className="text-foreground">RSS Studio</strong> conçoit et fabrique des aménagements sur mesure pour les particuliers et professionnels exigeants.
+                Depuis 2010, <strong className="text-foreground">RSS Studio</strong> conçoit et réalise des aménagements sur mesure pour les particuliers et professionnels exigeants.
               </p>
               <p>
-                Notre approche artisanale allie techniques traditionnelles du travail du bois et technologies de pointe pour créer des pièces uniques, parfaitement adaptées à vos espaces et à votre mode de vie.
+                Notre approche créative allie design contemporain et fonctionnalité pour créer des espaces uniques, parfaitement adaptés à vos besoins et à votre mode de vie.
               </p>
               <p className="hidden sm:block">
                 De la conception à l'installation, nous vous accompagnons à chaque étape pour transformer vos idées en réalisations d'exception.

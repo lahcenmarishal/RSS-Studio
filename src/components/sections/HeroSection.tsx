@@ -31,7 +31,7 @@ const HeroSection = ({ onNavigateToContact, onNavigateToServices }: HeroSectionP
           <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-accent/20 backdrop-blur-sm rounded-full border border-accent/30 opacity-0 animate-fade-up stagger-1">
             <span className="w-2 h-2 bg-accent rounded-full animate-pulse-soft" />
             <span className="font-sans text-xs sm:text-sm text-primary-foreground/90 tracking-wider uppercase">
-              Artisan Menuisier depuis 2010
+              Aménageur d'espace depuis 2010
             </span>
           </div>
 
