@@ -10,9 +10,7 @@ import NotFound from "./pages/NotFound";
 import AdminAuth from "./pages/AdminAuth";
 import Admin from "./pages/Admin";
 import AdminProject from "./pages/AdminProject";
-import Tarifs from "./pages/Tarifs";
 import AdminTarifs from "./pages/AdminTarifs";
-import Partenaires from "./pages/Partenaires";
 import AdminPartenaires from "./pages/AdminPartenaires";
 
 const queryClient = new QueryClient();
@@ -27,8 +25,6 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/tarifs" element={<Tarifs />} />
-              <Route path="/partenaires" element={<Partenaires />} />
               <Route path="/admin/auth" element={<AdminAuth />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/admin/project/:id" element={<AdminProject />} />
