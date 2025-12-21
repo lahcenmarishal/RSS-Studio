@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import logoRssStudio from '@/assets/logo-diamond-dark.png';
+import Logo from '@/components/Logo';
 
 interface NavItem {
   label: string;
@@ -55,10 +55,9 @@ const Navigation = ({ onNavigate, currentSection }: NavigationProps) => {
               onClick={() => handleNavClick(0)}
               className="flex items-center gap-2 group"
             >
-              <img 
-                src={logoRssStudio} 
-                alt="RSS Studio Logo" 
+              <Logo 
                 className="h-16 w-auto"
+                color={currentSection === 0 && !isScrolled ? 'hsl(43, 74%, 49%)' : 'hsl(43, 74%, 49%)'}
               />
             </button>
 
