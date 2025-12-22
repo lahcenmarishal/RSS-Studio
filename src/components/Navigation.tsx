@@ -55,12 +55,12 @@ const Navigation = ({ onNavigate, currentSection }: NavigationProps) => {
             {/* Logo */}
             <button 
               onClick={() => handleNavClick(0)}
-              className="flex flex-col items-center gap-1 group"
+              className="flex flex-col items-center gap-0 group"
             >
               <img 
                 src={logoDiamond} 
                 alt="RSS Studio Logo" 
-                className="h-12 w-auto"
+                className="h-14 w-auto"
               />
               <span 
                 className={`font-sans text-[11px] tracking-[0.15em] font-medium uppercase transition-colors duration-300 ${
