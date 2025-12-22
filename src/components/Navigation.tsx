@@ -55,15 +55,15 @@ const Navigation = ({ onNavigate, currentSection }: NavigationProps) => {
             {/* Logo */}
             <button 
               onClick={() => handleNavClick(0)}
-              className="flex flex-col items-center gap-0.5 group"
+              className="flex flex-col items-center gap-1 group"
             >
               <img 
                 src={logoDiamond} 
                 alt="RSS Studio Logo" 
-                className="h-10 w-auto"
+                className="h-8 w-auto"
               />
               <span 
-                className={`font-sans text-[10px] tracking-[0.2em] font-medium uppercase transition-colors duration-300 ${
+                className={`font-sans text-[11px] tracking-[0.15em] font-medium uppercase transition-colors duration-300 ${
                   currentSection === 0 && !isScrolled 
                     ? 'text-accent' 
                     : 'text-accent'
