@@ -60,7 +60,7 @@ const Navigation = ({ onNavigate, currentSection }: NavigationProps) => {
               <img 
                 src={logoDiamond} 
                 alt="RSS Studio Logo" 
-                className="h-8 w-auto"
+                className="h-12 w-auto"
               />
               <span 
                 className={`font-sans text-[11px] tracking-[0.15em] font-medium uppercase transition-colors duration-300 ${
