@@ -89,7 +89,7 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>RSS Studio | Aménageur d'Espace Sur Mesure à Berrechid - Cuisines, Dressings, Placards</title>
+        <title>RSS Studio | Aménageur d'Espace Sur Mesure partout au MAROC - Cuisines, Dressings, Placards</title>
         <meta name="description" content="RSS Studio, aménageur d'espace à Berrechid. Conception sur mesure de cuisines équipées, dressings, placards, habillages muraux et portes. Devis gratuit." />
         <meta name="keywords" content="aménagement espace, aménageur sur mesure, cuisine équipée, dressing, placards, habillage mural, portes, Berrechid, Casablanca, Maroc" />
         <link rel="canonical" href="https://rss-studio.ma" />
