@@ -63,7 +63,7 @@ const Navigation = ({ onNavigate, currentSection }: NavigationProps) => {
                 className="h-14 w-auto"
               />
               <span 
-                className={`font-sans text-[11px] tracking-[0.15em] font-medium uppercase transition-colors duration-300 ${
+                className={`font-sans text-[11px] tracking-[0.15em] font-medium uppercase transition-colors duration-300 -mt-1 ${
                   currentSection === 0 && !isScrolled 
                     ? 'text-accent' 
                     : 'text-accent'
