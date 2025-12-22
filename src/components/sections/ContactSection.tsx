@@ -21,8 +21,13 @@ const contactInfo = [
   },
   {
     icon: Phone,
-    title: 'Téléphone',
-    details: ['+212 6 00 00 00 00'],
+    title: 'Téléphone / WhatsApp',
+    details: ['+212 661-767059'],
+  },
+  {
+    icon: Phone,
+    title: 'Fax',
+    details: ['+212 522 515718'],
   },
   {
     icon: Mail,
@@ -88,7 +93,7 @@ const ContactSection = () => {
   };
 
   const handleWhatsApp = () => {
-    const phoneNumber = '212600000000';
+    const phoneNumber = '212661767059';
     const message = encodeURIComponent('Bonjour, je souhaite obtenir des informations sur vos services.');
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
   };
