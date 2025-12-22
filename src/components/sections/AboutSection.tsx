@@ -62,7 +62,7 @@ const AboutSection = () => {
 
             {/* Title */}
             <h2 className="font-serif text-2xl sm:text-4xl lg:text-5xl text-foreground leading-tight">
-              Un studio dédié à
+              <strong>RSS STUDIO</strong> dédié à
               <span className="text-accent"> l'aménagement d'espace</span>
             </h2>
 
