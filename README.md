@@ -45,4 +45,4 @@ https://rss-studio.ma/
 
 ## Auteur
 
-Développé par **Prodevelo**.
+Développé par **Lahcen, développeur IA.**.
